@@ -1,4 +1,4 @@
-package main
+package settings
 
 import (
 	"errors"
@@ -18,7 +18,7 @@ func (settings CommandSettings) isValid() bool {
 	return settings.BucketName != "" && settings.AccessKey != "" && settings.AccessSecret != ""
 }
 
-func parseSettings() (settings CommandSettings, err error) {
+func ParseSettings() (settings CommandSettings, err error) {
 
 	flag.StringVar(&settings.DestinationPath, "dest", "/", "The destination path on S3, defaults to root")
 	flag.StringVar(&settings.SourcePath, "src", ".", "The source path on your local machine, defaults to '.'")
