@@ -1,10 +1,10 @@
 package request
 
 import (
-	"net/http"
-	"log"
-	"io/ioutil"
 	"bytes"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
 func MakeRequest(filepath, bucketName string, headers map[string]string) (resp *http.Response, err error) {
@@ -13,7 +13,7 @@ func MakeRequest(filepath, bucketName string, headers map[string]string) (resp *
 	contents, _ := ioutil.ReadFile(filepath)
 	reader := bytes.NewReader(contents)
 
-	request, err := http.NewRequest("PUT", "http://" + bucketName + ".s3.amazonaws.com/" + filepath, reader)
+	request, err := http.NewRequest("PUT", "http://"+bucketName+".s3.amazonaws.com/"+filepath, reader)
 
 	if err != nil {
 		log.Fatal(err)

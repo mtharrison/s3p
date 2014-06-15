@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/mtharrison/s3p/files"
-	"github.com/mtharrison/s3p/settings"
-	"github.com/mtharrison/s3p/auth"
-	"github.com/mtharrison/s3p/request"
-	"log"
 	"fmt"
+	"github.com/mtharrison/s3p/auth"
+	"github.com/mtharrison/s3p/files"
+	"github.com/mtharrison/s3p/request"
+	"github.com/mtharrison/s3p/settings"
+	"log"
 )
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Println(file.Path, "=>", settings.BucketName + ".amazonaws.com/" + file.Path, "copied ok")
+		fmt.Println(file.Path, "=>", settings.BucketName+".amazonaws.com/"+file.Path, "copied ok")
 	}
 
 }

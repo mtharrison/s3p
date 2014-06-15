@@ -1,19 +1,19 @@
 package auth
 
 import (
-	"io/ioutil"
-	"github.com/mtharrison/s3p/files"
-	"github.com/mtharrison/s3p/settings"
-	"log"
+	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
+	"github.com/mtharrison/s3p/files"
+	"github.com/mtharrison/s3p/settings"
+	"io/ioutil"
+	"log"
 	"time"
-	"crypto/hmac"
 )
 
 func GetHeaders(file files.File, settings settings.CommandSettings) map[string]string {
 
-// 3 stage process from http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html
+	// 3 stage process from http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html
 
 	// Task 1: Create a Canonical Request
 
@@ -70,10 +70,10 @@ func GetHeaders(file files.File, settings settings.CommandSettings) map[string]s
 		signature)
 
 	retMap := map[string]string{
-		"Authorization": header,
-		"Host": settings.BucketName+".s3.amazonaws.com",
+		"Authorization":        header,
+		"Host":                 settings.BucketName + ".s3.amazonaws.com",
 		"x-amz-content-sha256": signedPayload,
-		"x-amz-date": xdate,
+		"x-amz-date":           xdate,
 	}
 
 	return retMap
