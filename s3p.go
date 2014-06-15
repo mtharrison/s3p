@@ -1,10 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"github.com/mtharrison/s3p/files"
 	"github.com/mtharrison/s3p/settings"
+	"github.com/mtharrison/s3p/auth"
+	"github.com/mtharrison/s3p/request"
 	"log"
+	"fmt"
 )
 
 func main() {
@@ -16,12 +18,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	files, err := files.GetFiles(settings.SourcePath)
+	// Get the files
+	files, err := files.GetFiles(settings.SourcePath,
+		settings.IncludeHidden)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(files)
+	for _, file := range files {
+		// Get the required headers
+		headers := auth.GetHeaders(file, settings)
+
+		//Do the actual request
+		_, err := request.MakeRequest(file.Path, settings.BucketName, headers)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(file.Path, "=>", settings.BucketName + ".amazonaws.com/" + file.Path, "copied ok")
+	}
 
 }
