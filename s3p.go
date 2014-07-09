@@ -30,14 +30,14 @@ func main() {
 		// Get the required headers
 		headers := auth.GetHeaders(file, settings)
 
-		//Do the actual request
-		_, err := request.MakeRequest(file.Path, settings.BucketName, headers)
+		// Do the actual request
+		_, err := request.MakeRequest(file.Path, settings.DestinationPath, settings.BucketName, headers)
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fmt.Println(file.Path, "=>", settings.BucketName+".amazonaws.com/"+file.Path, "copied ok")
+		fmt.Println(file.Path, "=>", settings.BucketName+".amazonaws.com/"+settings.DestinationPath+file.Path, "copied ok")
 	}
 
 }

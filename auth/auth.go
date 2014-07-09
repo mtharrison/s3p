@@ -30,7 +30,7 @@ func GetHeaders(file files.File, settings settings.CommandSettings) map[string]s
 	xdate := time.Now().UTC().Format("20060102T150405Z")
 
 	canonicalRequest := "PUT\n" +
-		"/" + file.Path + "\n" +
+		"/" + settings.DestinationPath + file.Path + "\n" +
 		"\n" +
 		"host:" + settings.BucketName + ".s3.amazonaws.com\n" +
 		"x-amz-content-sha256:" + signedPayload + "\n" +

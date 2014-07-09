@@ -7,13 +7,13 @@ import (
 	"net/http"
 )
 
-func MakeRequest(filepath, bucketName string, headers map[string]string) (resp *http.Response, err error) {
+func MakeRequest(filepath, destinationPath, bucketName string, headers map[string]string) (resp *http.Response, err error) {
 
 	client := &http.Client{}
 	contents, _ := ioutil.ReadFile(filepath)
 	reader := bytes.NewReader(contents)
 
-	request, err := http.NewRequest("PUT", "http://"+bucketName+".s3.amazonaws.com/"+filepath, reader)
+	request, err := http.NewRequest("PUT", "http://"+bucketName+".s3.amazonaws.com/"+destinationPath+filepath, reader)
 
 	if err != nil {
 		log.Fatal(err)
