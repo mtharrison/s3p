@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mtharrison/s3p/auth"
+	"github.com/mtharrison/awsauth"
 	"github.com/mtharrison/s3p/files"
 	"github.com/mtharrison/s3p/request"
 	"github.com/mtharrison/s3p/settings"
@@ -28,7 +28,7 @@ func main() {
 
 	for _, file := range files {
 		// Get the required headers
-		headers := auth.GetHeaders(file, settings)
+		headers := awsauth.GetHeaders(file, settings)
 
 		// Do the actual request
 		_, err := request.MakeRequest(file.Path, settings.DestinationPath, settings.BucketName, headers)
